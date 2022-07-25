@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 WS=/tmp/workspace/
 cd $WS
 acpype -f -i NAG.pdb -o gmx -d

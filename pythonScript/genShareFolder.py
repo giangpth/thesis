@@ -291,7 +291,7 @@ def processLigand(savedlig, outpath, chipath, debug=False):
     # Get absolute path of "Share" folder 
     shareabs = os.path.abspath (os.path.join(outpath, "Share"))
 
-    acpypefile = '#!/bin/bash\n'
+    acpypefile = '#!/bin/sh\n'
     acpypefile += 'WS=/tmp/workspace/\n'
     acpypefile += 'cd $WS\n'
 

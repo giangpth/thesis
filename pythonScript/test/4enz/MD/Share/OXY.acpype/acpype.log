@@ -1,6 +1,6 @@
-==========================================================================
-| ACPYPE: AnteChamber PYthon Parser interfacE v. 2022.6.6 (c) 2022 AWSdS |
-==========================================================================
+===========================================================================
+| ACPYPE: AnteChamber PYthon Parser interfacE v. 2022.7.21 (c) 2022 AWSdS |
+===========================================================================
 DEBUG: CLI: -f -i OXY.pdb -o gmx -d
 DEBUG: Python Version 3.8.10 (default, Mar 15 2022, 12:22:08) 
 [GCC 9.4.0]
@@ -9,7 +9,7 @@ DEBUG: setResNameCheckCoords done
 WARNING: no charge value given, trying to guess one...
 DEBUG: guessCharge: /usr/bin/obabel -ipdb OXY.pdb -omol2 -O OXY.mol2
 DEBUG: 1 molecule converted
-DEBUG: /home/acpype/amber21-11_linux/bin/antechamber -dr no -i /tmp/workspace/scripts/pythonScript/test/4enz/MD/Share/.acpype_tmp_OXY/OXY.mol2 -fi mol2 -o tmp -fo mol2 -c gas -pf n
+DEBUG: /home/acpype/amber21-11_linux/bin/antechamber -dr no -i /tmp/workspace/.acpype_tmp_OXY/OXY.mol2 -fi mol2 -o tmp -fo mol2 -c gas -pf n
 DEBUG: /home/acpype/amber21-11_linux/bin/antechamber -dr no -i tmp -fi mol2 -o tmp -fo mol2 -c wc -cf tmp.crg -pf n
 DEBUG: ++++++++++start_quote+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 DEBUG: 
@@ -92,4 +92,4 @@ DEBUG: improperDihedrals 0
 DEBUG: GMX improper dihedrals done
 ==> Writing pickle file OXY.pkl
 Total time of execution: 5s
-DEBUG: Keeping folder '/tmp/workspace/scripts/pythonScript/test/4enz/MD/Share/.acpype_tmp_OXY' for possible helping debugging
+DEBUG: Keeping folder '/tmp/workspace/.acpype_tmp_OXY' for possible helping debugging

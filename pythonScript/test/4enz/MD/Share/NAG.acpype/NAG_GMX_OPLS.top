@@ -1,0 +1,19 @@
+; NAG_GMX_OPLS.top created by acpype (v: 2022.7.21) on Mon Jul 25 23:08:19 2022
+
+; Include forcefield parameters
+#include "ffoplsaa.itp"
+
+; Include NAG_GMX.itp topology
+#include "NAG_GMX.itp"
+
+; Ligand position restraints
+#ifdef POSRES_LIG
+#include "posre_NAG.itp"
+#endif
+
+[ system ]
+ NAG
+
+[ molecules ]
+; Compound        nmols
+ NAG              1     

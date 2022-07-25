@@ -1,0 +1,19 @@
+; GOL_GMX_OPLS.top created by acpype (v: 2022.7.21) on Mon Jul 25 23:09:26 2022
+
+; Include forcefield parameters
+#include "ffoplsaa.itp"
+
+; Include GOL_GMX.itp topology
+#include "GOL_GMX.itp"
+
+; Ligand position restraints
+#ifdef POSRES_LIG
+#include "posre_GOL.itp"
+#endif
+
+[ system ]
+ GOL
+
+[ molecules ]
+; Compound        nmols
+ GOL              1     

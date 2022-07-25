@@ -1,4 +1,4 @@
-log started: Sat Jul 23 21:06:32 2022
+log started: Mon Jul 25 23:08:57 2022
 
 Log file: ./leap.log
 >> #
@@ -270,7 +270,7 @@ Loading: NVAL
 ----- Source: /home/acpype/amber21-11_linux/dat/leap/cmd/leaprc.gaff2
 ----- Source of /home/acpype/amber21-11_linux/dat/leap/cmd/leaprc.gaff2 done
 >> logFile leap.log
-log started: Sat Jul 23 21:06:33 2022
+log started: Mon Jul 25 23:08:59 2022
 
 Log file: ./leap.log
 >> #
