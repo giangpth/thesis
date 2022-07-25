@@ -15,9 +15,7 @@ def parseAgruments():
     parser.add_argument('-i', '--data', type=str, nargs='?', \
         help='Path to data folder', required=True)
     parser.add_argument('-c', '--chimera', type=str, nargs='?', \
-        help='Name of ChimeraX docker image', default='rbvi/chimerax-devel')
-    parser.add_argument('-a', '--acpype', type=str, nargs='?', \
-        help='Name of the docker image to call acpype', default='acpype/acpype')
+        help='Path to chimeraX running file', default='/user/bin/chimerax')
     parser.add_argument('-d', '--debug', \
         help="Print log to debug or not", action='store_true')
     return parser
@@ -187,6 +185,7 @@ def separateLigands(prodict, ligdict, metadict, ionsdict, outpath, debug=False):
                     print("Save ligand to file {}".format(fname))
                 f = open(fname, 'w')
                 f.write(''.join(ligdict[chain][id]['lines']))
+                f.close()
                 savedlig.append(nameid + '.pdb')
             else: # an ion with only one atom 
                 if name in ionsdict: # only consider ion supported by the force field 
@@ -261,6 +260,7 @@ def separateLigands(prodict, ligdict, metadict, ionsdict, outpath, debug=False):
             ligfilelines.append('../Share/' + lig + '.acpype/' + 'posre_' + lig + '.itp\n')
     ligfile = open(os.path.join(outpath, 'Share', 'ligands.txt'), 'w')
     ligfile.write(''.join(ligfilelines))
+    ligfile.close()
 
     
     # write ions.txt file if there is any ion(s)
@@ -278,27 +278,60 @@ def separateLigands(prodict, ligdict, metadict, ionsdict, outpath, debug=False):
     #     print(ionsfileline)
     ionfile = open(os.path.join(outpath, 'Share', 'ions.txt'), 'w')
     ionfile.write(''.join(ionsfileline))
+    ionfile.close()
     if debug:
         print(savedlig)
     return savedlig
 
 # Run ChimeraX container to add Hydrogen to ligands 
-def processLigand(savedlig, outpath, chipath, acpypename, debug=False):
+def processLigand(savedlig, outpath, chipath, debug=False):
     # All the file need to be process by chimera and acpype will be in "Share" folder
-    # Get absolute path of "Share" folder to be able to mount this folder to container
-    share = os.path.abspath (os.path.join(outpath, "Share"))
-    bindto = '/tmp/workspace'
+    # get current directory to be able to change back 
+    curdir = os.getcwd()
+    # Get absolute path of "Share" folder 
+    shareabs = os.path.abspath (os.path.join(outpath, "Share"))
+
+    acpypefile = '#!/bin/bash\n'
+    acpypefile += 'WS=/tmp/workspace/\n'
+    acpypefile += 'cd $WS\n'
+
+    os.chdir("/") # cd to the root folder in case of macos
+    for lig in savedlig:
+        if debug:
+            print("Working with ligand {}".format(lig))
+        ligpath = shareabs + '/' + lig
+        cxcfile = 'addh\n'
+        cxcfile += 'save ' + ligpath + " models #1 relModel #1\n"
+        cxcfile += 'exit\n'
+        if debug:
+            print(cxcfile)
+        cxcpath = os.path.join(shareabs, 'add_hydrogen.cxc')
+        f = open(cxcpath, 'w')
+        f.write(cxcfile)
+        f.close()
+        # run ChimeraX 
+        command = ['.' + chipath, '--nogui', '--silent' ,ligpath, cxcpath]
+        if debug:
+            print(' '.join(command))
+        os.system(' '.join(command))
+        acpypefile += 'acpype -f -i ' + lig + ' -o gmx -d\n'
+
+        # delete .cxc file 
+        if debug:
+            print("Remove {}".format(cxcpath))
+        os.remove(cxcpath)
+
+    facname = os.path.join(shareabs, "run_acpype.sh")
+    fac = open(facname, 'w')
+    fac.write(acpypefile)
+    fac.close()
+    
+    os.chdir(curdir)
     if debug:
-        print(share)
-    # write file run_chimera_ligs.sh for docker to call ChimeraX to add hydrogen to ligand 
-    shchilines = ['cd ' + bindto + '\n']
-    
-
-
-
-
+        print("The current directory is {}".format(curdir))
 
     
+
 def main():
     parser = parseAgruments()
     args= vars(parser.parse_args())
@@ -319,7 +352,7 @@ def main():
         ionsdict = {}
 
     savedlig = separateLigands(prodict, ligdict, metadict, ionsdict, args['outpath'], debug)
-    processLigand(savedlig, args['outpath'], args['chimera'], args['acpype'], debug)
+    processLigand(savedlig, args['outpath'], args['chimera'], debug)
 
 if __name__ == "__main__":
     main()
