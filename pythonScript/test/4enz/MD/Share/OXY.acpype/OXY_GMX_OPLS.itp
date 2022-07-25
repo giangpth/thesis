@@ -1,0 +1,18 @@
+; OXY_GMX_OPLS.itp created by acpype (v: 2022.6.6) on Sat Jul 23 21:06:30 2022
+
+; For OPLS atomtypes manual fine tuning
+; AC_at:OPLS_at:OPLScode: Possible_Alternatives (see ffoplsaa.atp and ffoplsaanb.itp)
+; o:O:opls_236: ['272']
+
+[ moleculetype ]
+;name            nrexcl
+ OXY              3
+
+[ atoms ]
+;   nr  type  resi  res  atom  cgnr     charge      mass       ; qtot   bond_type
+     1 opls_236     1   OXY    O1    1     0.000000     15.99940 ; qtot  0.000  O   
+     2 opls_236     1   OXY    O2    2     0.000000     15.99940 ; qtot  0.000  O   
+
+[ bonds ]
+;   ai     aj funct   r             k
+     1      2   1 ;    1.4300e-01    1.1832e+05 ;     O1 - O2          O - O     

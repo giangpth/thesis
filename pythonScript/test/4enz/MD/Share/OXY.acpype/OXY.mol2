@@ -1,0 +1,11 @@
+@<TRIPOS>MOLECULE
+OXY.pdb
+ 2 1 0 0 0
+SMALL
+GASTEIGER
+
+@<TRIPOS>ATOM
+      1  O1        24.5240   75.2360   11.3560 O.2   1109  OXY1109     0.0000
+      2  O2        25.5160   75.9310   11.4760 O.2   1109  OXY1109     0.0000
+@<TRIPOS>BOND
+     1     1     2    2

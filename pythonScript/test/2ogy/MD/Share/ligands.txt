@@ -1,0 +1,9 @@
+1
+=============
+C2F
+2
+../Share/C2F.acpype/C2F_fix.gro
+../Share/C2F_1.acpype/C2F_1_fix.gro
+../Share/C2F.acpype/C2F_fix.itp
+../Share/C2F.acpype/C2F_fix.prm
+../Share/C2F.acpype/posre_C2F.itp

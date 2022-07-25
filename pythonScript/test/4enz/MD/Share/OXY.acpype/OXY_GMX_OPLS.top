@@ -1,0 +1,19 @@
+; OXY_GMX_OPLS.top created by acpype (v: 2022.6.6) on Sat Jul 23 21:06:30 2022
+
+; Include forcefield parameters
+#include "ffoplsaa.itp"
+
+; Include OXY_GMX.itp topology
+#include "OXY_GMX.itp"
+
+; Ligand position restraints
+#ifdef POSRES_LIG
+#include "posre_OXY.itp"
+#endif
+
+[ system ]
+ OXY
+
+[ molecules ]
+; Compound        nmols
+ OXY              1     

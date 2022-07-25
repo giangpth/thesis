@@ -1,0 +1,10 @@
+
+verbosity 1
+source leaprc.protein.ff14SB
+source leaprc.gaff2
+mods = loadamberparams OXY_AC.frcmod
+OXY = loadmol2 OXY_bcc_gaff2.mol2
+check OXY
+saveamberparm OXY OXY_AC.prmtop OXY_AC.inpcrd
+saveoff OXY OXY_AC.lib
+quit
