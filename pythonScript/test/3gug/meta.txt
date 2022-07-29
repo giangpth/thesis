@@ -7,7 +7,7 @@ ff 					= amber
 # name of ligand of interest 
 lig 					= C2U
 # name of the force field, choose between: amber03, amber94, amber96, amber99, amber99sb, amber99sb-ildn, ambergs
-ff_name				= amber99
+ff_name				= amber99sb
 # name of the water model 
 water 				= tip3p
 # box type, choose between: triclinic, cubic, dodecahedron, octahedron

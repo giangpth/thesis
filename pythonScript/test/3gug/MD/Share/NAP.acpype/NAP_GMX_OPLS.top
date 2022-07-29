@@ -1,0 +1,19 @@
+; NAP_GMX_OPLS.top created by acpype (v: 2022.7.21) on Tue Jul 26 22:36:42 2022
+
+; Include forcefield parameters
+#include "ffoplsaa.itp"
+
+; Include NAP_GMX.itp topology
+#include "NAP_GMX.itp"
+
+; Ligand position restraints
+#ifdef POSRES_LIG
+#include "posre_NAP.itp"
+#endif
+
+[ system ]
+ NAP
+
+[ molecules ]
+; Compound        nmols
+ NAP              1     

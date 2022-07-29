@@ -1,0 +1,10 @@
+
+verbosity 1
+source leaprc.protein.ff14SB
+source leaprc.gaff2
+mods = loadamberparams NAP_AC.frcmod
+NAP = loadmol2 NAP_bcc_gaff2.mol2
+check NAP
+saveamberparm NAP NAP_AC.prmtop NAP_AC.inpcrd
+saveoff NAP NAP_AC.lib
+quit

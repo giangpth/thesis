@@ -1,0 +1,19 @@
+; C2U_GMX_OPLS.top created by acpype (v: 2022.7.21) on Tue Jul 26 23:04:15 2022
+
+; Include forcefield parameters
+#include "ffoplsaa.itp"
+
+; Include C2U_GMX.itp topology
+#include "C2U_GMX.itp"
+
+; Ligand position restraints
+#ifdef POSRES_LIG
+#include "posre_C2U.itp"
+#endif
+
+[ system ]
+ C2U
+
+[ molecules ]
+; Compound        nmols
+ C2U              1     

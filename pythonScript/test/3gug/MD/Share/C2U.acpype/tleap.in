@@ -1,0 +1,10 @@
+
+verbosity 1
+source leaprc.protein.ff14SB
+source leaprc.gaff2
+mods = loadamberparams C2U_AC.frcmod
+C2U = loadmol2 C2U_bcc_gaff2.mol2
+check C2U
+saveamberparm C2U C2U_AC.prmtop C2U_AC.inpcrd
+saveoff C2U C2U_AC.lib
+quit

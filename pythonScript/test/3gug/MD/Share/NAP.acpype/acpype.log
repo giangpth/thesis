@@ -1,0 +1,73 @@
+===========================================================================
+| ACPYPE: AnteChamber PYthon Parser interfacE v. 2022.7.21 (c) 2022 AWSdS |
+===========================================================================
+DEBUG: CLI: -f -i NAP.pdb -n 0 -o gmx -d
+DEBUG: Python Version 3.8.10 (default, Mar 15 2022, 12:22:08) 
+[GCC 9.4.0]
+DEBUG: Max execution time tolerance is 3h
+DEBUG: setResNameCheckCoords done
+DEBUG: Net charge drift '0.000000'
+==> ... charge set to 0
+==> ... converting pdb input file to mol2 input file
+DEBUG: /usr/bin/obabel -ipdb NAP.pdb -omol2 -O NAP.mol2
+==> * Babel OK *
+==> Executing Antechamber...
+DEBUG: /home/acpype/amber21-11_linux/bin/antechamber -dr no -i NAP.mol2 -fi mol2 -o NAP_bcc_gaff2.mol2 -fo mol2 -c bcc -nc 0 -m 1 -s 2 -df 2 -at gaff2 -pf n 
+DEBUG: No file left to be removed
+==> * Antechamber OK *
+DEBUG: /home/acpype/amber21-11_linux/bin/parmchk2 -i NAP_bcc_gaff2.mol2 -f mol2 -o NAP_AC.frcmod -s 2
+==> * Parmchk OK *
+DEBUG: No crd or prm files left to be removed
+==> Executing Tleap...
+DEBUG: /home/acpype/amber21-11_linux/bin/tleap -f tleap.in
+DEBUG: ++++++++++start_quote+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DEBUG: Checking 'NAP'....
+Checking parameters for unit 'NAP'.
+Checking for bond parameters.
+Checking for angle parameters.
+Unit is OK.
+DEBUG: ++++++++++end_quote+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+==> * Tleap OK *
+DEBUG: prmtop and inpcrd files loaded
+DEBUG: basename defined = 'NAP'
+DEBUG: getCoords done
+DEBUG: getABCOEFs done
+DEBUG: charge to be balanced: total -0.0019999912
+DEBUG: balanceCharges done
+DEBUG: Balanced TotalCharge 0.0000000000
+DEBUG: PBC = None
+DEBUG: getAtoms done
+DEBUG: getBonds done
+DEBUG: getAngles done
+DEBUG: getDihedrals done
+==> Using OpenBabel v.3.0.0
+
+==> Writing GROMACS files
+
+==> Disambiguating lower and uppercase atomtypes in GMX top file, even if identical.
+
+DEBUG: writing GRO file
+DEBUG: Box size estimated
+DEBUG: writing POSRE file
+DEBUG: atomTypes 24
+DEBUG: GMX atomtypes done
+DEBUG: atoms 78
+DEBUG: GMX atoms done
+DEBUG: bonds 82
+DEBUG: GMX bonds done
+DEBUG: atomPairs 188
+DEBUG: GMX pairs done
+DEBUG: angles 142
+DEBUG: GMX angles done
+DEBUG: setProperDihedralsCoef done
+DEBUG: properDihedralsCoefRB 209
+DEBUG: properDihedralsAlphaGamma 0
+DEBUG: properDihedralsGmx45 283
+==> Writing GMX dihedrals for GMX 4.5 and higher.
+
+DEBUG: GMX special proper dihedrals done
+DEBUG: improperDihedrals 14
+DEBUG: GMX improper dihedrals done
+==> Writing pickle file NAP.pkl
+Total time of execution: 27m 32s
+DEBUG: Keeping folder '/tmp/workspace/.acpype_tmp_NAP' for possible helping debugging

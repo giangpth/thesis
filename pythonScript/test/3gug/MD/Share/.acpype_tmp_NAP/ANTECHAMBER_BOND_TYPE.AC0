@@ -1,0 +1,152 @@
+CHARGE     -4.00 ( -4 )
+Formula: H25 C21 N7 O17 P3 
+ATOM      1  PA  NAP   350       9.148  -6.954  27.845  0.268673        p5
+ATOM      2  O1A NAP   350      10.116  -7.960  27.357 -0.509797         o
+ATOM      3  O2A NAP   350       9.622  -5.627  28.318 -0.509797         o
+ATOM      4  O5B NAP   350       8.308  -7.570  29.067 -0.318516        os
+ATOM      5  C5B NAP   350       7.473  -8.687  28.906  0.083787        c3
+ATOM      6  C4B NAP   350       6.484  -8.835  30.071  0.112412        c3
+ATOM      7  O4B NAP   350       7.165  -8.881  31.302 -0.348397        os
+ATOM      8  C3B NAP   350       5.451  -7.721  30.220  0.113267        c3
+ATOM      9  O3B NAP   350       4.247  -8.238  29.703 -0.387410        oh
+ATOM     10  C2B NAP   350       5.288  -7.511  31.713  0.134060        c3
+ATOM     11  O2B NAP   350       3.965  -7.818  32.201 -0.344067        os
+ATOM     12  C1B NAP   350       6.314  -8.439  32.361  0.159480        c3
+ATOM     13  N9A NAP   350       7.169  -7.770  33.385 -0.244455        na
+ATOM     14  C8A NAP   350       7.623  -6.492  33.396  0.091228        cc
+ATOM     15  N7A NAP   350       8.371  -6.287  34.497 -0.233736        nd
+ATOM     16  C5A NAP   350       8.388  -7.465  35.192  0.145052        ca
+ATOM     17  C6A NAP   350       8.970  -7.894  36.398  0.146191        ca
+ATOM     18  N6A NAP   350       9.744  -7.092  37.169 -0.341286        nh
+ATOM     19  N1A NAP   350       8.774  -9.175  36.790 -0.219504        nb
+ATOM     20  C2A NAP   350       8.025 -10.018  36.086  0.119509        ca
+ATOM     21  N3A NAP   350       7.444  -9.663  34.917 -0.218590        nb
+ATOM     22  C4A NAP   350       7.624  -8.384  34.469  0.158584        ca
+ATOM     23  O3  NAP   350       7.939  -6.647  26.805 -0.256264        os
+ATOM     24  PN  NAP   350       7.882  -6.229  25.264  0.268673        p5
+ATOM     25  O1N NAP   350       7.979  -7.433  24.365 -0.509797         o
+ATOM     26  O2N NAP   350       6.643  -5.368  25.184 -0.509797         o
+ATOM     27  O5D NAP   350       9.164  -5.315  24.998 -0.318516        os
+ATOM     28  C5D NAP   350       9.271  -4.036  25.646  0.083786        c3
+ATOM     29  C4D NAP   350       9.052  -2.876  24.690  0.112383        c3
+ATOM     30  O4D NAP   350      10.027  -2.794  23.604 -0.348533        os
+ATOM     31  C3D NAP   350       7.668  -2.784  24.020  0.112585        c3
+ATOM     32  O3D NAP   350       6.617  -2.378  24.912 -0.387437        oh
+ATOM     33  C2D NAP   350       7.940  -1.738  22.961  0.125577        c3
+ATOM     34  O2D NAP   350       7.976  -0.424  23.592 -0.385803        oh
+ATOM     35  C1D NAP   350       9.346  -2.194  22.487  0.155954        c3
+ATOM     36  N1N NAP   350       9.329  -3.203  21.391 -0.284519        na
+ATOM     37  C2N NAP   350       9.693  -2.806  20.162  0.010465        ca
+ATOM     38  C3N NAP   350       9.677  -3.685  19.065  0.050990        ca
+ATOM     39  C7N NAP   350      10.124  -3.217  17.711  0.241580         c
+ATOM     40  O7N NAP   350       9.855  -3.893  16.707 -0.272136         o
+ATOM     41  N7N NAP   350      10.863  -2.101  17.701 -0.325031         n
+ATOM     42  C4N NAP   350       9.311  -5.028  19.262 -0.047140        ca
+ATOM     43  C5N NAP   350       8.946  -5.445  20.554 -0.047191        ca
+ATOM     44  C6N NAP   350       8.973  -4.506  21.605 -0.002054        ca
+ATOM     45  P2B NAP   350       3.210  -6.733  33.146  0.060618        p5
+ATOM     46  O1X NAP   350       2.831  -5.571  32.243 -0.634055         o
+ATOM     47  O2X NAP   350       1.992  -7.546  33.578 -0.634055         o
+ATOM     48  O3X NAP   350       4.147  -6.292  34.268 -0.634055         o
+ATOM     49  H5B1NAP   350       6.911  -8.576  27.979  0.060057        h1
+ATOM     50  H5B2NAP   350       8.088  -9.585  28.844  0.060057        h1
+ATOM     51  H4B NAP   350       5.950  -9.777  29.944  0.065802        h1
+ATOM     52  H3B NAP   350       5.757  -6.808  29.709  0.065893        h1
+ATOM     53  H2B NAP   350       5.531  -6.478  31.960  0.068281        h1
+ATOM     54  H1B NAP   350       5.807  -9.294  32.807  0.085458        h2
+ATOM     55  H8A NAP   350       7.416  -5.752  32.637  0.101817        h5
+ATOM     56  H2A NAP   350       7.875 -11.020  36.460  0.106438        h5
+ATOM     57  H5D1NAP   350      10.267  -3.947  26.080  0.060057        h1
+ATOM     58  H5D2NAP   350       8.531  -3.981  26.444  0.060057        h1
+ATOM     59  H4D NAP   350       9.170  -1.966  25.278  0.065802        h1
+ATOM     60  H3D NAP   350       7.415  -3.735  23.551  0.065867        h1
+ATOM     61  H2D NAP   350       7.208  -1.779  22.154  0.067546        h1
+ATOM     62  H1D NAP   350       9.909  -1.321  22.156  0.085324        h2
+ATOM     63  H2N NAP   350      10.007  -1.784  20.012  0.080114        h4
+ATOM     64  H4N NAP   350       9.310  -5.725  18.437  0.063197        ha
+ATOM     65  H5N NAP   350       8.650  -6.467  20.738  0.063640        ha
+ATOM     66  H6N NAP   350       8.706  -4.823  22.602  0.079269        h4
+ATOM     67  H7N1NAP   350      11.061  -1.619  18.566  0.145840        hn
+ATOM     68  H7N2NAP   350      11.222  -1.741  16.828  0.145840        hn
+ATOM     69  HO3BNAP   350       3.557  -8.170  30.367  0.210728        ho
+ATOM     70  HO3DNAP   350       6.335  -3.130  25.438  0.210728        ho
+ATOM     71  H6A1NAP   350       9.915  -6.136  36.891  0.144231        hn
+ATOM     72  H6A2NAP   350      10.150  -7.450  38.022  0.144231        hn
+ATOM     73  HO2DNAP   350       8.148   0.246  22.927  0.210814        ho
+BOND    1    1    2    1     PA  O1A
+BOND    2    1    3    1     PA  O2A
+BOND    3    1    4    1     PA  O5B
+BOND    4    1   23    1     PA   O3
+BOND    5    4    5    1    O5B  C5B
+BOND    6    5    6    1    C5B  C4B
+BOND    7    5   49    1    C5B H5B1
+BOND    8    5   50    1    C5B H5B2
+BOND    9    6    7    1    C4B  O4B
+BOND   10    6    8    1    C4B  C3B
+BOND   11    6   51    1    C4B  H4B
+BOND   12    7   12    1    O4B  C1B
+BOND   13    8    9    1    C3B  O3B
+BOND   14    8   10    1    C3B  C2B
+BOND   15    8   52    1    C3B  H3B
+BOND   16    9   69    1    O3B HO3B
+BOND   17   10   11    1    C2B  O2B
+BOND   18   10   12    1    C2B  C1B
+BOND   19   10   53    1    C2B  H2B
+BOND   20   11   45    1    O2B  P2B
+BOND   21   12   13    1    C1B  N9A
+BOND   22   12   54    1    C1B  H1B
+BOND   23   13   14    1    N9A  C8A
+BOND   24   13   22    1    N9A  C4A
+BOND   25   14   15    2    C8A  N7A
+BOND   26   14   55    1    C8A  H8A
+BOND   27   15   16    1    N7A  C5A
+BOND   28   16   17   10    C5A  C6A
+BOND   29   16   22   10    C5A  C4A
+BOND   30   17   18    1    C6A  N6A
+BOND   31   17   19   10    C6A  N1A
+BOND   32   18   71    1    N6A H6A1
+BOND   33   18   72    1    N6A H6A2
+BOND   34   19   20   10    N1A  C2A
+BOND   35   20   21   10    C2A  N3A
+BOND   36   20   56    1    C2A  H2A
+BOND   37   21   22   10    N3A  C4A
+BOND   38   23   24    1     O3   PN
+BOND   39   24   25    1     PN  O1N
+BOND   40   24   26    1     PN  O2N
+BOND   41   24   27    1     PN  O5D
+BOND   42   27   28    1    O5D  C5D
+BOND   43   28   29    1    C5D  C4D
+BOND   44   28   57    1    C5D H5D1
+BOND   45   28   58    1    C5D H5D2
+BOND   46   29   30    1    C4D  O4D
+BOND   47   29   31    1    C4D  C3D
+BOND   48   29   59    1    C4D  H4D
+BOND   49   30   35    1    O4D  C1D
+BOND   50   31   32    1    C3D  O3D
+BOND   51   31   33    1    C3D  C2D
+BOND   52   31   60    1    C3D  H3D
+BOND   53   32   70    1    O3D HO3D
+BOND   54   33   34    1    C2D  O2D
+BOND   55   33   35    1    C2D  C1D
+BOND   56   33   61    1    C2D  H2D
+BOND   57   34   73    1    O2D HO2D
+BOND   58   35   36    1    C1D  N1N
+BOND   59   35   62    1    C1D  H1D
+BOND   60   36   37    1    N1N  C2N
+BOND   61   36   44    2    N1N  C6N
+BOND   62   37   38   10    C2N  C3N
+BOND   63   37   63    1    C2N  H2N
+BOND   64   38   39    1    C3N  C7N
+BOND   65   38   42   10    C3N  C4N
+BOND   66   39   40    2    C7N  O7N
+BOND   67   39   41    1    C7N  N7N
+BOND   68   41   67    1    N7N H7N1
+BOND   69   41   68    1    N7N H7N2
+BOND   70   42   43   10    C4N  C5N
+BOND   71   42   64    1    C4N  H4N
+BOND   72   43   44   10    C5N  C6N
+BOND   73   43   65    1    C5N  H5N
+BOND   74   44   66    1    C6N  H6N
+BOND   75   45   46    1    P2B  O1X
+BOND   76   45   47    1    P2B  O2X
+BOND   77   45   48    1    P2B  O3X
