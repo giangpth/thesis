@@ -46,9 +46,9 @@ DEBUG: prmtop and inpcrd files loaded
 DEBUG: basename defined = 'NAG_1'
 DEBUG: getCoords done
 DEBUG: getABCOEFs done
-DEBUG: charge to be balanced: total -0.0040009944
+DEBUG: charge to be balanced: total 0.0009990056
 DEBUG: balanceCharges done
-DEBUG: Balanced TotalCharge -0.0000000000
+DEBUG: Balanced TotalCharge 0.0000000000
 DEBUG: PBC = None
 DEBUG: getAtoms done
 DEBUG: getBonds done
@@ -83,5 +83,5 @@ DEBUG: GMX special proper dihedrals done
 DEBUG: improperDihedrals 2
 DEBUG: GMX improper dihedrals done
 ==> Writing pickle file NAG_1.pkl
-Total time of execution: 25s
+Total time of execution: 17s
 DEBUG: Keeping folder '/tmp/workspace/.acpype_tmp_NAG_1' for possible helping debugging

@@ -91,5 +91,5 @@ DEBUG: GMX special proper dihedrals done
 DEBUG: improperDihedrals 0
 DEBUG: GMX improper dihedrals done
 ==> Writing pickle file OXY.pkl
-Total time of execution: 5s
+Total time of execution: 4s
 DEBUG: Keeping folder '/tmp/workspace/.acpype_tmp_OXY' for possible helping debugging

@@ -1,4 +1,4 @@
-; NAG_1_GMX_OPLS.itp created by acpype (v: 2022.7.21) on Mon Jul 25 23:09:01 2022
+; NAG_1_GMX_OPLS.itp created by acpype (v: 2022.7.21) on Fri Jul 29 19:58:52 2022
 
 ; For OPLS atomtypes manual fine tuning
 ; AC_at:OPLS_at:OPLScode: Possible_Alternatives (see ffoplsaa.atp and ffoplsaanb.itp)
@@ -19,35 +19,35 @@
 
 [ atoms ]
 ;   nr  type  resi  res  atom  cgnr     charge      mass       ; qtot   bond_type
-     1 opls_135     1   NAG    C1    1     0.127400     12.01100 ; qtot  0.127  CT  
-     2 opls_135     1   NAG    C2    2     0.032700     12.01100 ; qtot  0.160  CT  
-     3 opls_135     1   NAG    C3    3     0.078100     12.01100 ; qtot  0.238  CT  
-     4 opls_135     1   NAG    C4    4     0.093100     12.01100 ; qtot  0.331  CT  
-     5 opls_135     1   NAG    C5    5     0.096100     12.01100 ; qtot  0.427  CT  
-     6 opls_135     1   NAG    C6    6     0.140400     12.01100 ; qtot  0.568  CT  
-     7 opls_235     1   NAG    C7    7     0.669101     12.01100 ; qtot  1.237  C   
-     8 opls_135     1   NAG    C8    8    -0.173100     12.01100 ; qtot  1.064  CT  
-     9 opls_x     1   NAG    N2    9    -0.559900      0.00000 ; qtot  0.504  x   
-    10 opls_154     1   NAG    O3   10    -0.604800     15.99940 ; qtot -0.101  OH  
-    11 opls_154     1   NAG    O4   11    -0.595800     15.99940 ; qtot -0.697  OH  
-    12 opls_x     1   NAG    O5   12    -0.417600      0.00000 ; qtot -1.114  x   
-    13 opls_154     1   NAG    O6   13    -0.595800     15.99940 ; qtot -1.710  OH  
-    14 opls_236     1   NAG    O7   14    -0.615100     15.99940 ; qtot -2.325  O   
-    15 opls_140     1   NAG   H11   15     0.058700      1.00800 ; qtot -2.266  HC  
-    16 opls_140     1   NAG   H12   16     0.058700      1.00800 ; qtot -2.208  HC  
-    17 opls_140     1   NAG    H2   17     0.097700      1.00800 ; qtot -2.110  HC  
-    18 opls_140     1   NAG    H3   18     0.081700      1.00800 ; qtot -2.028  HC  
-    19 opls_140     1   NAG    H4   19     0.052700      1.00800 ; qtot -1.976  HC  
-    20 opls_140     1   NAG    H5   20     0.068700      1.00800 ; qtot -1.907  HC  
-    21 opls_140     1   NAG   H61   21     0.064200      1.00800 ; qtot -1.843  HC  
-    22 opls_140     1   NAG   H62   22     0.064200      1.00800 ; qtot -1.779  HC  
-    23 opls_240     1   NAG   HN2   23     0.306500      1.00800 ; qtot -1.472  H   
-    24 opls_155     1   NAG   HO3   24     0.429000      1.00800 ; qtot -1.043  HO  
-    25 opls_155     1   NAG   HO4   25     0.424000      1.00800 ; qtot -0.619  HO  
-    26 opls_155     1   NAG   HO6   26     0.409000      1.00800 ; qtot -0.210  HO  
-    27 opls_140     1   NAG   H81   27     0.070033      1.00800 ; qtot -0.140  HC  
-    28 opls_140     1   NAG   H82   28     0.070033      1.00800 ; qtot -0.070  HC  
-    29 opls_140     1   NAG   H83   29     0.070033      1.00800 ; qtot  0.000  HC  
+     1 opls_135     1   NAG    C1    1     0.112400     12.01100 ; qtot  0.112  CT  
+     2 opls_135     1   NAG    C2    2     0.028700     12.01100 ; qtot  0.141  CT  
+     3 opls_135     1   NAG    C3    3     0.097100     12.01100 ; qtot  0.238  CT  
+     4 opls_135     1   NAG    C4    4     0.126100     12.01100 ; qtot  0.364  CT  
+     5 opls_135     1   NAG    C5    5     0.095100     12.01100 ; qtot  0.459  CT  
+     6 opls_135     1   NAG    C6    6     0.141400     12.01100 ; qtot  0.601  CT  
+     7 opls_235     1   NAG    C7    7     0.654101     12.01100 ; qtot  1.255  C   
+     8 opls_135     1   NAG    C8    8    -0.176100     12.01100 ; qtot  1.079  CT  
+     9 opls_x     1   NAG    N2    9    -0.579900      0.00000 ; qtot  0.499  x   
+    10 opls_154     1   NAG    O3   10    -0.604800     15.99940 ; qtot -0.106  OH  
+    11 opls_154     1   NAG    O4   11    -0.596800     15.99940 ; qtot -0.703  OH  
+    12 opls_x     1   NAG    O5   12    -0.413600      0.00000 ; qtot -1.116  x   
+    13 opls_154     1   NAG    O6   13    -0.595800     15.99940 ; qtot -1.712  OH  
+    14 opls_236     1   NAG    O7   14    -0.589100     15.99940 ; qtot -2.301  O   
+    15 opls_140     1   NAG   H11   15     0.055700      1.00800 ; qtot -2.245  HC  
+    16 opls_140     1   NAG   H12   16     0.055700      1.00800 ; qtot -2.190  HC  
+    17 opls_140     1   NAG    H2   17     0.117700      1.00800 ; qtot -2.072  HC  
+    18 opls_140     1   NAG    H3   18     0.046700      1.00800 ; qtot -2.025  HC  
+    19 opls_140     1   NAG    H4   19     0.065700      1.00800 ; qtot -1.960  HC  
+    20 opls_140     1   NAG    H5   20     0.067700      1.00800 ; qtot -1.892  HC  
+    21 opls_140     1   NAG   H61   21     0.064200      1.00800 ; qtot -1.828  HC  
+    22 opls_140     1   NAG   H62   22     0.064200      1.00800 ; qtot -1.764  HC  
+    23 opls_240     1   NAG   HN2   23     0.303500      1.00800 ; qtot -1.460  H   
+    24 opls_155     1   NAG   HO3   24     0.418000      1.00800 ; qtot -1.042  HO  
+    25 opls_155     1   NAG   HO4   25     0.425000      1.00800 ; qtot -0.617  HO  
+    26 opls_155     1   NAG   HO6   26     0.410000      1.00800 ; qtot -0.207  HO  
+    27 opls_140     1   NAG   H81   27     0.069033      1.00800 ; qtot -0.138  HC  
+    28 opls_140     1   NAG   H82   28     0.069033      1.00800 ; qtot -0.069  HC  
+    29 opls_140     1   NAG   H83   29     0.069033      1.00800 ; qtot  0.000  HC  
 
 [ bonds ]
 ;   ai     aj funct   r             k

@@ -1,7 +1,9 @@
 import argparse as ap
 from curses import meta
+from genericpath import isfile
 import json
 import os
+import shutil
 
 
 def parseAgruments():
@@ -20,8 +22,11 @@ def parseAgruments():
         help="Print log to debug or not", action='store_true')
     return parser
 
-def parseMetaFile(metapath, debug=False):
-    meta = {'type': 'homo', 'ff': 'amber', 'num_chain': 1, 'lig': ''} # default meta data
+# read meta data and save config file from the provided information 
+def parseMetaFile(metapath, outpath, debug=False):
+    meta = {'type': 'homo', 'ff': 'amber', 'num_chain': 1, 'lig': '', \
+        'ff_name': "amber99sb", 'water': 'tip3p', 'bt': "dodecahedron", \
+        'p_name': "NA", 'n_name': "CL"} # default meta data 
     if not os.path.isfile(metapath):
         print("The path of the pdb file is not correct")
         exit()
@@ -42,11 +47,26 @@ def parseMetaFile(metapath, debug=False):
         meta['num_chain'] = 1
     if debug: 
         print(meta)
+    # generate config file from meta file 
+    config = 'pdb2gmx: -ff ' + meta['ff_name'] + ' -water ' + meta['water'] + ' -ignh\n'
+    config += 'edifconf: -bt ' + meta['bt']+ ' -d 1.0\n'
+    config += 'genion: -pname ' + meta['p_name'] + ' -nname ' + meta['n_name'] + '\n'
+    config += 'grompp: -maxwarn 50\n'
+
+    if not os.path.isdir(os.path.join(outpath, 'Share')):
+        if debug:
+            print("Creating 'Share' directory")
+        os.mkdir(os.path.join(outpath, 'Share'))
+    fname = os.path.join(outpath, 'Share','config.txt')
+    fconfig = open(fname, 'w')
+    fconfig.write(config)
+    fconfig.close()
+
     return meta
 
 def parseLine(line, debug=False):
-    key = str(line[0:7]).strip()
-    id = int(''.join(line[7:11]))
+    key = str(line[0:6]).strip()
+    id = int(''.join(line[6:11]))
     atom = str(line[11:17]).strip()
     name = str(line[17:21]).strip()
     chain = str(line[21:22]).strip()
@@ -65,7 +85,7 @@ def parseLine(line, debug=False):
     if debug:
         print(key, id, atom, name, chain, resid, x, y, z, a, b, kind)
     linedict = {'key': key, \
-        'aid': id, 'name': name, \
+        'aid': id, 'atom': atom ,'name': name, \
         'chain': chain, 'rid': resid, \
         'line': line}
     return linedict
@@ -125,9 +145,10 @@ def getLigands(pdbpath, debug=False):
     return prochains, ligs
 
 # Function to read the metadata to see how many ligands and ions to consider
-# Then dump the ligands.json file
+# Then create the ligands.txt file
 # Create one file for each ligand and then add hydrogen by calling chimera     
-def separateLigands(prodict, ligdict, metadict, ionsdict, outpath, debug=False):
+# Also prepare coupling group for .mdp files 
+def separateLigands(prodict, ligdict, metadict, ionsdict, outpath, datapath, debug=False):
     # get the infor from the metadata dictionary 
     num_chain = metadict['num_chain']
     consider = metadict['lig']
@@ -190,6 +211,8 @@ def separateLigands(prodict, ligdict, metadict, ionsdict, outpath, debug=False):
             else: # an ion with only one atom 
                 if name in ionsdict: # only consider ion supported by the force field 
                     newlines = ligdict[chain][id]['lines'] # this is a list of string
+
+                    # change the name of the ion if the name is not like the name declared in the force field
                     if name != ionsdict[name]:
                         if debug:
                             print("Change the name of ion {} to {}".format(name, ionsdict[name]))
@@ -211,11 +234,11 @@ def separateLigands(prodict, ligdict, metadict, ionsdict, outpath, debug=False):
                         liginfor['ions'][name] = 1
                         nameid = name
                         ionscons[nameid] = newlines
-                        fname = os.path.join(outpath, 'Share', nameid + '.pdb')
+                        # fname = os.path.join(outpath, 'Share', nameid + '.pdb')
                     else:
                         nameid = name + '_' + str(liginfor['ions'][name]) 
                         ionscons[nameid] = newlines
-                        fname = os.path.join(outpath, 'Share', nameid + '.pdb')
+                        # fname = os.path.join(outpath, 'Share', nameid + '.pdb')
                         liginfor['ions'][name] += 1 # this must be after nameid
                 # there is not else, omit all kind of ions that is not supported by the forcefield 
     if debug:
@@ -281,6 +304,109 @@ def separateLigands(prodict, ligdict, metadict, ionsdict, outpath, debug=False):
     ionfile.close()
     if debug:
         print(savedlig)
+
+
+    # from here prepare coupling group of .mdp files 
+    # get information about ions and ligands from liginfor 
+    # only couple protein with ligand, not ion 
+    group1 = 'Protein'
+    if liginfor['ions']: # if there are some ions to be considered 
+        for ionname in liginfor['ions'].keys():
+            group1 += '_' + ionname
+    if liginfor['ligands']: # if there are some ligands to be considered 
+        # consider the ligand of interest first 
+        group1 += '_' + consider
+        for ligname in liginfor['ligands'].keys():
+            if ligname != consider:
+                group1 += '_' + ligname
+    if debug:
+        print(group1)
+
+    group2 = 'non-Protein'
+    if liginfor['ions']: # if there are some ions to be considered 
+        for ionname in liginfor['ions'].keys():
+            group2 += '_&_!' + ionname
+    if liginfor['ligands']: # if there are some ligands to be considered 
+        # consider the ligand of interest first 
+        group2 += '_&_!' + consider
+        for ligname in liginfor['ligands'].keys():
+            if ligname != consider:
+                group2 += '_&_!' + ligname
+    
+    if debug:
+        print(group2)
+
+    
+
+    # now add group to template .mdp file from folder data 
+    # file nvt.mdp, copy file from data folder then put to Share folder and modify coupling group
+    if os.path.isfile(os.path.join(datapath, 'nvt.mdp')):
+        ftnvt = open(os.path.join(datapath, 'nvt.mdp'))
+        nvtlines = ftnvt.readlines()
+        ftnvt.close()
+        for nvtid, nvtline in enumerate(nvtlines):
+            if 'tc-grps' in nvtline:
+                nvtline = nvtline.replace('Protein_Ligands', group1)
+                nvtlines[nvtid] = nvtline.replace('Water_and_ions', group2)
+        fnvt = open(os.path.join(outpath, 'Share', 'nvt.mdp'), 'w')
+        fnvt.write(''.join(nvtlines))
+        fnvt.close()
+    else:
+        print("Cannot file nvt.mdp file in the data folder")
+
+    # file npt.mdp 
+    if os.path.isfile(os.path.join(datapath, 'npt.mdp')):
+        ftnpt = open(os.path.join(datapath, 'npt.mdp'))
+        nptlines = ftnpt.readlines()
+        ftnpt.close()
+        for nptid, nptline in enumerate(nptlines):
+            if 'tc-grps' in nptline:
+                nptline = nptline.replace('Protein_Ligands', group1)
+                nptlines[nptid] = nptline.replace('Water_and_ions', group2)
+        fnpt = open(os.path.join(outpath, 'Share', 'npt.mdp'), 'w')
+        fnpt.write(''.join(nptlines))
+        fnpt.close()
+    else:
+        print("Cannot file nvt.mdp file in the data folder")
+
+    # file md.mdp 
+    if os.path.isfile(os.path.join(datapath, 'md.mdp')):
+        ftmd = open(os.path.join(datapath, 'md.mdp'))
+        mdlines = ftmd.readlines()
+        ftmd.close()
+        for mdid, mdline in enumerate(mdlines):
+            if 'tc-grps' in mdline:
+                mdline = mdline.replace('Protein_Ligands', group1)
+                mdlines[mdid] = mdline.replace('Water_and_ions', group2)
+        fmd = open(os.path.join(outpath, 'Share', 'md.mdp'), 'w')
+        fmd.write(''.join(mdlines))
+        fmd.close()
+    else:
+        print("Cannot file npt.mdp file in the data folder")
+
+    # copy em.mdp and ions.mdp from data to Share directory
+    emtar = os.path.join(datapath, 'em.mdp')
+    emdes = os.path.join(outpath, 'Share', 'em.mdp')
+    if os.path.isfile(emtar):
+        shutil.copy(emtar, emdes)
+    else:
+        print("Cannot find em.mdp in data folder")
+    
+    ionstar = os.path.join(datapath, 'ions.mdp')
+    ionsdes = os.path.join(outpath, 'Share', 'ions.mdp')
+    if os.path.isfile(ionstar):
+        shutil.copy(ionstar, ionsdes)
+    else:
+        print("Cannot find ions.mdp in data folder")
+
+    # copy mmpbsa.in from data to Share directory
+    mmtar = os.path.join(datapath, 'mmpbsa.in')
+    mmdes = os.path.join(outpath, 'Share', 'mmpbsa.in')
+    if os.path.isfile(mmtar):
+        shutil.copy(mmtar, mmdes)
+    else:
+        print("Cannot find mmpbsa.in in data folder")
+
     return savedlig
 
 # Run ChimeraX container to add Hydrogen to ligands 
@@ -298,27 +424,27 @@ def processLigand(savedlig, outpath, chipath, debug=False):
     os.chdir("/") # cd to the root folder in case of macos
     for lig in savedlig:
         if debug:
-            print("Working with ligand {}".format(lig))
+            print("Adding hydrogen to ligand {}".format(lig))
         ligpath = shareabs + '/' + lig
         cxcfile = 'addh\n'
-        cxcfile += 'save ' + ligpath + " models #1 relModel #1\n"
+        cxcfile += 'save ' + ligpath + " models #1\n"
         cxcfile += 'exit\n'
-        if debug:
-            print(cxcfile)
+        # if debug:
+        #     print(cxcfile)
         cxcpath = os.path.join(shareabs, 'add_hydrogen.cxc')
         f = open(cxcpath, 'w')
         f.write(cxcfile)
         f.close()
         # run ChimeraX 
         command = ['.' + chipath, '--nogui', '--silent' ,ligpath, cxcpath]
-        if debug:
-            print(' '.join(command))
+        # if debug:
+        #     print(' '.join(command))
         os.system(' '.join(command))
         acpypefile += 'acpype -f -i ' + lig + ' -o gmx -d\n'
 
         # delete .cxc file 
-        if debug:
-            print("Remove {}".format(cxcpath))
+        # if debug:
+        #     print("Remove {}".format(cxcpath))
         os.remove(cxcpath)
 
     facname = os.path.join(shareabs, "run_acpype.sh")
@@ -330,7 +456,70 @@ def processLigand(savedlig, outpath, chipath, debug=False):
     if debug:
         print("The current directory is {}".format(curdir))
 
+def genInputGmx(outpath, debug=False):
+    ligfname = os.path.join(outpath, 'Share', 'ligands.txt')
+    ionname = os.path.join(outpath, "Share", 'ions.txt')
     
+    nlig = 0
+    if os.path.isfile(ligfname):
+        flig = open(ligfname, 'r')
+        try:
+            nlig += int(flig.readline().strip())
+        except:
+            print("Cannot convert {} to number of species of ligands".format(flig.readline().strip()))
+    
+    nion = 0
+    if os.path.isfile(ionname):
+        fion = open(ionname, 'r')
+        try:
+            nion += int(fion.readline().strip())
+        except:
+            print("Cannot convert {} to number of species of ions".format(fion.readline().strip()))
+
+    if debug:
+        print("Number species of ions is {}".format(nion))
+        print("Number species of ligands is {}".format(nlig))
+
+    # create "Share" directory if not exist
+    if not os.path.isdir(os.path.join(outpath, 'Share')):
+        os.mkdir(os.path.join(outpath, 'Share'))
+    
+    # generate input_genion.txt 
+    fgenionname = os.path.join(outpath, 'Share', 'input_genion.txt')
+    fgenion = open(fgenionname, 'w')
+    fgenion.write('SOL\n')
+    fgenion.close()
+
+    # generate input_coupling.txt
+    fcouplename = os.path.join(outpath, 'Share', 'input_coupling.txt')
+    fcouple = open(fcouplename, 'w')
+    # the first group
+    fcouplecont = '1'
+    for i in range(nlig + nion):
+        fcouplecont += ' | ' + str(13 + i)
+    fcouplecont += '\n'
+    # the second group
+    fcouplecont += '11'
+    for i in range(nlig + nion):
+        fcouplecont += ' & !' + str(13 + i)
+    fcouplecont += '\n'
+    fcouplecont += 'q\n'
+    fcouple.write(fcouplecont)
+    fcouple.close()
+
+    # generate input_nopbc.txt
+    fpbcname = os.path.join(outpath, 'Share', 'input_nopbc.txt')
+    fpbc = open(fpbcname, 'w')
+    fpbc.write('1\n0\n')
+    fpbc.close()
+
+    # generate input_fit.txt
+    ffitname = os.path.join(outpath, 'Share', 'input_fit.txt')
+    ffit = open(ffitname, 'w')
+    ffit.write('4\n0\n')
+    ffit.close()
+
+
 
 def main():
     parser = parseAgruments()
@@ -340,7 +529,7 @@ def main():
     else:
         debug = args['debug']
     
-    metadict = parseMetaFile(args['meta'], debug)
+    metadict = parseMetaFile(args['meta'], args['outpath'],debug)
     prodict, ligdict = getLigands(args['pdb'], debug)
     try:
         ff = metadict['ff']
@@ -351,8 +540,9 @@ def main():
         print("There is not ions list found. Consider no type of ions")
         ionsdict = {}
 
-    savedlig = separateLigands(prodict, ligdict, metadict, ionsdict, args['outpath'], debug)
+    savedlig = separateLigands(prodict, ligdict, metadict, ionsdict, args['outpath'], args['data'], debug)
     processLigand(savedlig, args['outpath'], args['chimera'], debug)
+    genInputGmx(args['outpath'], debug)
 
 if __name__ == "__main__":
     main()

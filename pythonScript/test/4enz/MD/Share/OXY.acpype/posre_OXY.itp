@@ -1,4 +1,4 @@
-; posre_OXY.itp created by acpype (v: 2022.7.21) on Mon Jul 25 23:08:56 2022
+; posre_OXY.itp created by acpype (v: 2022.7.21) on Fri Jul 29 19:58:48 2022
 
 [ position_restraints ]
 ; atom  type      fx      fy      fz

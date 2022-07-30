@@ -1,4 +1,4 @@
-; NAG_GMX.top created by acpype (v: 2022.7.21) on Mon Jul 25 23:08:19 2022
+; NAG_GMX.top created by acpype (v: 2022.7.21) on Fri Jul 29 19:58:25 2022
 
 [ defaults ]
 ; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ

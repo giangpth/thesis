@@ -1,4 +1,4 @@
-; OXY_GMX.itp created by acpype (v: 2022.7.21) on Mon Jul 25 23:08:56 2022
+; OXY_GMX.itp created by acpype (v: 2022.7.21) on Fri Jul 29 19:58:48 2022
 
 [ atomtypes ]
 ;name   bond_type     mass     charge   ptype   sigma         epsilon       Amb

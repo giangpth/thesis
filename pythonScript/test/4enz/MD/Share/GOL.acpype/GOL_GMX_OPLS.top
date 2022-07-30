@@ -1,4 +1,4 @@
-; GOL_GMX_OPLS.top created by acpype (v: 2022.7.21) on Mon Jul 25 23:09:26 2022
+; GOL_GMX_OPLS.top created by acpype (v: 2022.7.21) on Fri Jul 29 19:59:10 2022
 
 ; Include forcefield parameters
 #include "ffoplsaa.itp"

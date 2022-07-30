@@ -83,5 +83,5 @@ DEBUG: GMX special proper dihedrals done
 DEBUG: improperDihedrals 2
 DEBUG: GMX improper dihedrals done
 ==> Writing pickle file NAG.pkl
-Total time of execution: 37s
+Total time of execution: 23s
 DEBUG: Keeping folder '/tmp/workspace/.acpype_tmp_NAG' for possible helping debugging
