@@ -15,7 +15,7 @@ means: <br>
 - from position 7 to 19 in the second sequence change the wt amino acid to K <br>
 
 
-
+<br> 
 
 # Syntax to run predictBatch.py <br>
 python3 predictBatch.py -f [path to folder contains fasta files] -o [path to output folder] -a [path to alphafold folder] -t [max template date - optional]
@@ -28,45 +28,8 @@ python3 alignStructure.py -f [Path of the folder contains subfolders, each subfo
 For example: <br>
 python3 alignStructure.py -f /Users/phamgiang/Documents/Study/Master/Thesis/Workspace/Validate/HIV1_PROTEASE_1/1GNO_MUTATIONS -o /Users/phamgiang/Documents/Study/Master/Thesis/Workspace/Validate/HIV1_PROTEASE_1/MD -c /Applications/ChimeraX-1.4-rc2022.05.29.app/Contents/MacOS/ChimeraX -p /Users/phamgiang/Documents/Study/Master/Thesis/Workspace/Validate/HIV1_PROTEASE_1/Raw/1gno.pdb -d  <br>
 <br>
-# Syntax to run formComplexBatch.py  <br>
-python3 formComplexBatch.py -f [Path the the folder contains subfolders, each subfolder is for one protein] -c [Path to the config file which has information of ligands] <br>
-<br>
+
 ## Syntax for the directory structure <br>
 The root directory of all the computation (which is pass as agrument -f) contains: <br>
 - A subfolder named 'Share' which contains all the files needed for all the ligands and also the ligands.txt file and the config_pdb2gmx.txt file that has information about force field and water model. If there are more than one species of ligand, each species should be in a separated subfolder.  <br>
 - A list of subfolders which will be the working directory for each MD simulation of each mutated protein. In those subfolder there is needed a .pdb of the pure protein. <br>
-
-
-## Syntax of the ligands.txt file 
-[number_types_ligand]
-[======] # separated line
-[name_of_the_ligand]
-[number_ligands_of_type_1] 
-[Path_to_list_of_.gro_files_of_ligand_type_1]
-[Path_to_.itp_file_of_ligand_type_1]
-[Path_to_.prm_file_of_ligand_type_1]
-[Path_to_posre_file_of_ligand_type_1]
-[======]
-[name_of_the_ligand]
-[number_ligands_of_type_2] 
-[Path_to_list_of_.gro_files_of_ligand_type_2]
-[Path_to_.itp_file_of_ligand_type_2]
-[Path_to_.prm_file_of_ligand_type_2]
-[Path_to_posre_file_of_ligand_type_2]
-....
-[======]
-[name_of_the_ligand]
-[number_ligands_of_type_n] 
-[Path_to_list_of_.gro_files_of_ligand_type_n]
-[Path_to_.itp_file_of_ligand_type_n]
-[Path_to_.prm_file_of_ligand_type_n]
-[Path_to_posre_file_of_ligand_type_n]
-
-All the paths need to be absolute 
-The name of the ligand needs to be the same with the name declared in the section [ moleculetype ] of the file .itp 
-The separate lines are mandatory
-
-## Syntax of the config.txt file 
-pdb2gmx: [option_to_run_pdb2gmx]
-editconf: [option_to_run_editconf]
-genion: [option_to_run_genion]
