@@ -1,0 +1,20 @@
+; XCF_GMX.top created by acpype (v: 2022.7.21) on Sat Jul 30 11:47:39 2022
+
+[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+1               2               yes             0.5     0.8333333333
+
+; Include XCF_GMX.itp topology
+#include "XCF_GMX.itp"
+
+; Ligand position restraints
+#ifdef POSRES_LIG
+#include "posre_XCF.itp"
+#endif
+
+[ system ]
+ XCF
+
+[ molecules ]
+; Compound        nmols
+ XCF              1     

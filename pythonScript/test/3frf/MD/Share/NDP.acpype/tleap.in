@@ -1,0 +1,10 @@
+
+verbosity 1
+source leaprc.protein.ff14SB
+source leaprc.gaff2
+mods = loadamberparams NDP_AC.frcmod
+NDP = loadmol2 NDP_bcc_gaff2.mol2
+check NDP
+saveamberparm NDP NDP_AC.prmtop NDP_AC.inpcrd
+saveoff NDP NDP_AC.lib
+quit

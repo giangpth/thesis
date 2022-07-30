@@ -296,12 +296,10 @@ def separateLigands(prodict, ligdict, metadict, ionsdict, outpath, datapath, deb
         ionsfileline = [str(len(liginfor['ions'].keys())) + '\n']
         for ionid in ionscons:
             ionsfileline.extend(ionscons[ionid])
-
-    # if debug:
-    #     print(ionsfileline)
-    ionfile = open(os.path.join(outpath, 'Share', 'ions.txt'), 'w')
-    ionfile.write(''.join(ionsfileline))
-    ionfile.close()
+            
+        ionfile = open(os.path.join(outpath, 'Share', 'ions.txt'), 'w')
+        ionfile.write(''.join(ionsfileline))
+        ionfile.close()
     if debug:
         print(savedlig)
 

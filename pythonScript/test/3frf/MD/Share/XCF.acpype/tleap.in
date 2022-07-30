@@ -1,0 +1,10 @@
+
+verbosity 1
+source leaprc.protein.ff14SB
+source leaprc.gaff2
+mods = loadamberparams XCF_AC.frcmod
+XCF = loadmol2 XCF_bcc_gaff2.mol2
+check XCF
+saveamberparm XCF XCF_AC.prmtop XCF_AC.inpcrd
+saveoff XCF XCF_AC.lib
+quit
