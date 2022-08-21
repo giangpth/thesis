@@ -1,4 +1,0 @@
-[ atomtypes ]
-;name   bond_type     mass     charge   ptype   sigma         epsilon       Amb
- o        o           0.00000  0.00000   A     3.04812e-01   6.12119e-01 ; 1.71  0.1463
-

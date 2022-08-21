@@ -81,7 +81,6 @@ def writeNewFile(fastas, fullname, debug=False):
         outfile.write('\n')
     outfile.close()
 
-
 def genMutationFiles(fastas, muts, outpath, debug=False): # start counts from 1
     for mut in muts:
         seq_id = mut[3]
@@ -130,12 +129,5 @@ def main():
         muts = parseMutationFile(args['mutations'], debug)
         genMutationFiles(seqs, muts, args['outpath'], debug)
 
-    
-
-    
-
-
-
 if __name__ == "__main__":
     main()
-    
