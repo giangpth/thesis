@@ -28,8 +28,8 @@ def parseAgruments():
         help='Path to alphafold folder', \
         required=True)
     parser.add_argument('-c', '--docker', type=str, nargs='?', \
-        help='Name of the docker image of chimera_gmxmmpbsa', \
-        default='chimera_gmxmmpbsa')
+        help='Name of the docker image of workflow', \
+        default='workflow')
     parser.add_argument('-l', '--acpype', type=str, nargs='?', \
         help='Name of the docker image of acpype', \
         default='acpype/acpype')
@@ -47,7 +47,7 @@ def genMutation(fasta, mutfile, outpath, debug=False):
     if debug:
         print('\n\n')
 
-def genShareFolder(metafile, pdbfile, rootpath, datafolder, debug=False):
+def genShareFolder(metafile, pdbfile, rootpath, datafolder, dockername, debug=False):
     if debug:
         print('GENERATE SHARE FOLDER')
     # need to generate an sh file and then run a docker container to run it
@@ -105,7 +105,7 @@ def genShareFolder(metafile, pdbfile, rootpath, datafolder, debug=False):
     comchmod = 'docker run --gpus all --rm --user $(id -u):$(id -g) --mount src=' 
     comchmod += rootpath + ','
     comchmod += 'target=/tmp/workspace,type=bind '
-    comchmod += 'chimera_gmxmmpbsa '
+    comchmod += dockername + ' '
     comchmod += 'chmod +x /tmp/workspace/run_genShare.sh'
     if debug:
         print(comchmod)
@@ -114,7 +114,7 @@ def genShareFolder(metafile, pdbfile, rootpath, datafolder, debug=False):
     comrun = 'docker run --gpus all --rm --user $(id -u):$(id -g) --mount src=' 
     comrun += rootpath + ','
     comrun += 'target=/tmp/workspace,type=bind '
-    comrun += 'chimera_gmxmmpbsa '
+    comrun += dockername + ' '
     comrun += '/tmp/workspace/run_genShare.sh'
     if debug:
         print(comrun)
@@ -133,7 +133,7 @@ def parseMetaFile(metapath, debug=False):
         'p_name': "NA", 'n_name': "CL", 'sim_step': 2000000, \
         'data_dir': '/data/genetic_databases/'} # default meta data 
     if not os.path.isfile(metapath):
-        print("The path of the pdb file is not correct")
+        print("The path of the input file {} is not correct".format(metapath))
         exit()
     file = open(metapath, 'r')
     lines = file.readlines() 
@@ -357,6 +357,11 @@ def cleanup(rootpath, debug=False):
         if debug:
             print("Delete file {}".format('MDBatch.py'))
         os.remove(os.path.join(rootpath, 'MDBatch.py'))
+
+    if os.path.isfile(os.path.join(rootpath, 'run_genShare.sh')):
+        if debug:
+            print("Delete file {}".format('run_genShare.sh'))
+        os.remove(os.path.join(rootpath, 'run_genShare.sh'))
     
 
 
@@ -386,28 +391,28 @@ def main():
         if not os.path.isdir(fastapath):
             print("Creating {} to save fasta files of mutations".format(fastapath))
             os.mkdir(fastapath)
-
-        metadic = parseMetaFile(args['input'], )
-
+        
         alphares = os.path.join(rootpath, 'alres')
-
         if not os.path.isdir(alphares):
+            print("Creating {} to save AlphaFold2's results".format(alphares))
             os.mkdir(alphares)
+
+        metadic = parseMetaFile(args['input'], debug)
 
         if debug:
             print('\n\n')
 
         genMutation(args['fasta'], args['mutation'], fastapath, debug)
         predictBatch(metadic, fastapath, alphares, args['alphafold'], metadic['data_dir'], debug)
-        sharepath = genShareFolder(args['input'], args['pdb'], rootpath, 'pythonScript/data', debug)
+        sharepath = genShareFolder(args['input'], args['pdb'], rootpath, \
+            'pythonScript/data', args['docker'], debug)
+
+        sharepath = os.path.join(rootpath, 'md', 'Share')
         runAcpype(sharepath, args['acpype'], debug)
         processLigand(sharepath, debug)
         alignStructure(rootpath, args['pdb'], args['docker'], debug)
         runMDBatch(rootpath, args['docker'], debug)
         cleanup(rootpath, debug)
-        
-
-
         
 if __name__ == "__main__":
     main()
